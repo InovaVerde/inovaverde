@@ -1,4 +1,3 @@
-import React from 'react';
 import ListaProdutos from '../../components/produtos/listaProduto/ListaProduto';
 
 function Loja() {

@@ -13,7 +13,6 @@ import FormularioCategoria from './components/categorias/formularioCategoria/For
 import DeletarCategoria from './components/categorias/deletarCategoria/DeletarCategoria';
 import DeletarProduto from './components/produtos/deletarProduto/DeletarProduto';
 import FormularioProduto from './components/produtos/formularioProduto/FormularioProduto';
-import ListaProdutos from './components/produtos/listaProduto/ListaProduto';
 import Perfil from './pages/perfil/Perfil';
 import Carrossel from './components/carrossel/Carrossel';
 import Carrinho from './pages/cart/Carrinho';

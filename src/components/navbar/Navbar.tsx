@@ -4,6 +4,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { AuthContext } from '../../contexts/AuthContext.tsx'
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
+import ModalCartProduto from '../produtos/modalProduto/ModalCartProduto.tsx';
 
 const navigation = [
   { name: 'Criar Conta', to: '/cadastro', current: false },
@@ -72,19 +73,34 @@ export default function Example() {
 )}
               </div>
               {usuario.id !== 0 && (
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                
+              <div className="absolute inset-y-0 right-0 flex items-center sm:static sm:inset-auto sm:ml-6 sm:pr-0 gap-2">
+                
+                <div className="flex justify-center items-center">
+    <div className="relative py-2 pr-2">
+
+  <div>
+  <ModalCartProduto />
+  
+  </div>
+ 
+</div>
+
+</div>
+
+                
               <a className="text-xs text-white bg-green-800 rounded-md px-3 py-1 font-medium">@{usuario.nome}</a>
                 
 
                 {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3">
+                <Menu as="div" className="relative ml-1">
 
                   <div>
                     <Menu.Button className="relative flex rounded-full bg-green-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-800">
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">Open user menu</span>
                       <img
-                        className="h-8 w-8 rounded-full border border-white-400 border-2"
+                        className="h-8 w-8 rounded-full border-white-400 border-2"
                         src={usuario.foto}
                         alt=""
                       />
@@ -115,6 +131,7 @@ export default function Example() {
     <span>@{usuario.nome}</span>
     <span className="font-bold">Créditos: 10</span>
   </div>
+  
 </div>
 </Link>
                         )}
@@ -234,10 +251,13 @@ export default function Example() {
       {item.name}
     </Disclosure.Button>
   ))}
+  
 </div>
           </Disclosure.Panel>
         </>
       )}
+      
     </Disclosure>
+    
   )
 }
