@@ -1,10 +1,9 @@
-import { ChangeEvent, useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { AuthContext } from '../../../contexts/AuthContext';
-import Produto from '../../../models/Produto';
-import Categoria from '../../../models/Categoria';
-import { buscar, atualizar, cadastrar } from '../../../services/Service';
-
+import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthContext";
+import Produto from "../../../models/Produto";
+import Categoria from "../../../models/Categoria";
+import { buscar, atualizar, cadastrar } from "../../../services/Service";
 
 function FormularioProduto() {
   const navigate = useNavigate();
@@ -18,19 +17,18 @@ function FormularioProduto() {
 
   const [categoria, setCategoria] = useState<Categoria>({
     id: 0,
-    nome: '',
-    subcategoria: '',
-    
+    nome: "",
+    subcategoria: "",
   });
 
   const [produto, setProduto] = useState<Produto>({
     id: 0,
-    nome: '', //titulo
-    preco: 0,  //texto
-    descricao: '',
+    nome: "", //titulo
+    preco: 0, //texto
+    descricao: "",
     estoque: 0,
-    dataValidade: new Date,  //data
-    foto: '',
+    dataValidade: new Date(), //data
+    foto: "",
     categoria: null,
     usuario: null,
     quantidadeCarrinho: 1,
@@ -53,7 +51,7 @@ function FormularioProduto() {
   }
 
   async function buscarCategorias() {
-    await buscar('/categorias', setCategorias, {
+    await buscar("/categorias", setCategorias, {
       headers: {
         Authorization: token,
       },
@@ -61,9 +59,9 @@ function FormularioProduto() {
   }
 
   useEffect(() => {
-    if (token === '') {
-      alert('Você precisa estar logado.');
-      navigate('/');
+    if (token === "") {
+      alert("Você precisa estar logado.");
+      navigate("/");
     }
   }, [token]);
 
@@ -72,7 +70,6 @@ function FormularioProduto() {
     if (id !== undefined) {
       buscarProdutoPorId(id);
       console.log(categoria);
-
     }
   }, [id]);
 
@@ -93,7 +90,7 @@ function FormularioProduto() {
   }
 
   function retornar() {
-    navigate('/produtos');
+    navigate("/produtos");
   }
 
   async function gerarNovaProduto(e: ChangeEvent<HTMLFormElement>) {
@@ -108,14 +105,14 @@ function FormularioProduto() {
             Authorization: token,
           },
         });
-        alert('Produto atualizado com sucesso!');
+        alert("Produto atualizado com sucesso!");
         retornar();
       } catch (error: any) {
-        if (error.toString().includes('403')) {
-          alert('O token expirou, favor logar novamente.')
-          handleLogout()
+        if (error.toString().includes("403")) {
+          alert("O token expirou, favor logar novamente.");
+          handleLogout();
         } else {
-          alert('Erro ao atualizar o produto.');
+          alert("Erro ao atualizar o produto.");
         }
       }
     } else {
@@ -126,24 +123,26 @@ function FormularioProduto() {
           },
         });
 
-        alert('Produto cadastrado com sucesso!');
+        alert("Produto cadastrado com sucesso!");
         retornar();
       } catch (error: any) {
-        if (error.toString().includes('403')) {
-          alert('O token expirou, favor logar novamente..')
-          handleLogout()
+        if (error.toString().includes("403")) {
+          alert("O token expirou, favor logar novamente..");
+          handleLogout();
         } else {
-          alert('Erro ao cadastrar o produto.');
+          alert("Erro ao cadastrar o produto.");
         }
       }
     }
   }
 
-  const carregandoCategoria = categoria.nome === '';
+  const carregandoCategoria = categoria.nome === "";
 
   return (
     <div className="container flex flex-col mx-auto items-center">
-      <h1 className="text-4xl text-center my-8">{id !== undefined ? 'Editar Produto' : 'Cadastre um novo produto'}</h1>
+      <h1 className="text-4xl text-center my-8">
+        {id !== undefined ? "Editar Produto" : "Cadastre um novo produto"}
+      </h1>
 
       <form onSubmit={gerarNovaProduto} className="flex flex-col w-1/2 gap-4">
         <div className="flex flex-col gap-2">
@@ -172,7 +171,9 @@ function FormularioProduto() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="descricao">Foto (Tenha a certeza de que é um link válido)</label>
+          <label htmlFor="descricao">
+            Foto (Tenha a certeza de que é um link válido)
+          </label>
           <input
             value={produto.foto}
             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
@@ -212,17 +213,34 @@ function FormularioProduto() {
 
         <div className="flex flex-col gap-2">
           <p>Categoria do produto</p>
-          <select name="categoria" id="categoria" className='border p-2 border-slate-800 rounded' onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}>
-            <option value="" selected disabled>Selecione uma categoria</option>
+          <select
+            name="categoria"
+            id="categoria"
+            className="border p-2 border-slate-800 rounded"
+            onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
+          >
+            <option value="" selected disabled>
+              Selecione uma categoria
+            </option>
             {categorias.map((categoria) => (
               <>
-                <option value={categoria.id} >{categoria.subcategoria}</option>
+                <option value={categoria.id}>{categoria.nome}</option>
               </>
             ))}
           </select>
         </div>
-        <button disabled={carregandoCategoria} type='submit' className='rounded disabled:bg-slate-200 bg-green-400 hover:bg-green-800 text-white font-bold w-1/2 mx-auto my-4 block py-2'>
-          {carregandoCategoria ? <span>Carregando</span> : id !== undefined ? 'Editar' : 'Cadastrar'}
+        <button
+          disabled={carregandoCategoria}
+          type="submit"
+          className="rounded disabled:bg-slate-200 bg-green-400 hover:bg-green-800 text-white font-bold w-1/2 mx-auto my-4 block py-2"
+        >
+          {carregandoCategoria ? (
+            <span>Carregando</span>
+          ) : id !== undefined ? (
+            "Editar"
+          ) : (
+            "Cadastrar"
+          )}
         </button>
       </form>
     </div>
