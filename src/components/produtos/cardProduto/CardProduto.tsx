@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { CarrinhoContext } from "../../../contexts/CarrinhoContext"; // Importe o contexto do carrinho
 import Produto from "../../../models/Produto";
+import ProdutosAvatar from "../../avatar/ProdutosAvatar";
 
 interface CardProdutoProps {
   post: Produto;
@@ -32,11 +33,7 @@ function CardProduto({ post }: CardProdutoProps): JSX.Element {
   return (
     <div className="card card-compact w-80 bg-green-800 shadow-xl rounded-lg">
       <figure>
-        <img
-          src={post.foto}
-          alt={post.nome}
-          className="rounded-t-lg min-h-60 max-h-60"
-        />
+      <ProdutosAvatar foto={post.foto}/>
       </figure>
       <div className="card-body ml-3">
         <p className="card-title text-2xl font-semibold text-white">

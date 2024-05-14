@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { Oval } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Produto from "../../../models/Produto";
@@ -94,18 +93,10 @@ function ListaProdutos() {
       </div>
 
       <div className="absolute flex mt-5 w-screen justify-center items-center">
-        {produtos.length === 0 && (
-          <Oval
-            visible={true}
-            height="80"
-            width="80"
-            color="#4fa94d"
-            ariaLabel="oval-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-          />
-        )}
-      </div>
+    {produtos.length === 0 && (
+      <h1 style={{ fontSize: '1.5em' }}>Nenhum produto foi encontrado!</h1>
+    )}
+</div>
       <div className="my-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center">
         {produtos.map((produto) => (
           <CardProduto key={produto.id} post={produto} />
