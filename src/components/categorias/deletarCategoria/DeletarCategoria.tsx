@@ -2,10 +2,11 @@ import { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { AuthContext } from '../../../contexts/AuthContext'
 import Categoria from '../../../models/Categoria'
-import { buscar, deletar } from '../../../services/Service'
+import { buscar } from '../../../services/Service'
+import { CardDefault } from './CardDefault'
 
 function DeletarCategoria() {
-    const [categoria, setCategoria] = useState<Categoria>({} as Categoria)
+    const [, setCategoria] = useState<Categoria>({} as Categoria)
 
     const navigate = useNavigate()
 
@@ -41,46 +42,39 @@ function DeletarCategoria() {
             buscarPorId(id)
         }
     }, [id])
-
-    function retornar() {
-        navigate("/categorias")
-    }
-
-    async function deletarCategoria() {
-        try {
-            await deletar(`/categorias/${id}`, {
-                headers: {
-                    'Authorization': token
-                }
-            })
-
-            alert('Categoria apagada com sucesso.')
-
-        } catch (error) {
-            alert('Erro ao apagar o Categoria')
-        }
-
-        retornar()
-    }
+    
     return (
-        <div className='container w-1/3 mx-auto'>
-            <h1 className='text-4xl text-center my-4'>Deletar categoria</h1>
-
-            <p className='text-center font-semibold mb-4'>Você tem certeza de que deseja apagar a categoria?</p>
-
-            <div className='border flex flex-col rounded-2xl overflow-hidden justify-between'>
-                <header className='py-2 px-6 bg-green-600 text-white font-bold text-2xl'>Categoria</header>
-                <p className='p-8 text-3xl bg-slate-200 h-full'>{categoria.nome}</p>
-                <p className='p-8 text-3xl bg-slate-200 h-full'>{categoria.subcategoria}</p>
-                <div className="flex">
-                    <button className='text-slate-100 bg-red-400 hover:bg-red-600 w-full py-2' onClick={retornar}>Não</button>
-                    <button className='w-full text-slate-100 bg-green-400 hover:bg-green-600 flex items-center justify-center' onClick={deletarCategoria}>
-                        Sim
-                    </button>
-                </div>
+        <div className='flex flex-col justify-center items-center min-h-screen bg-gradient-to-r from-emerald-500 to-emerald-700 relative z-[-1]'>
+          <div className="md:mt-20 w-full flex flex-col md:flex-row justify-around items-center">
+            {/* Imagem à esquerda */}
+            <div className="flex w-full md:w-1/3 justify-start items-center">
+              <img
+                src="https://static.vecteezy.com/system/resources/previews/019/053/688/original/blue-macaw-illustration-png.png"
+                alt="Imagem 1"
+                className={`${window.innerWidth < 768 ? 'w-1/4 mb-8 mt-8' : 'w-1/2'} md:w-auto h-auto flip-horizontal`}
+                style={{ transform: "scaleX(-1)" }}
+              />
             </div>
+      
+            {/* Conteúdo central */}
+            <div className={`flex flex-col items-center w-full md:w-1/3 z-10 ${window.innerWidth < 768 ? '' : ''}`}>
+              <CardDefault />
+            </div>
+      
+            {/* Imagem à direita */}
+            <div className="flex w-full md:w-1/3 justify-end items-center md:mb-0">
+              <img
+                src="https://static.vecteezy.com/system/resources/previews/019/053/688/original/blue-macaw-illustration-png.png"
+                alt="Imagem 2"
+                className={`${window.innerWidth < 768 ? 'w-1/4 mb-8 mt-8' : 'w-1/2'} md:w-auto h-auto`}
+              />
+            </div>
+          </div>
         </div>
-    )
+      )
+      
+      
+      
 }
 
 export default DeletarCategoria

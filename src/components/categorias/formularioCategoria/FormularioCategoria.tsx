@@ -101,29 +101,29 @@ function FormularioCategoria() {
       <h1 className="text-4xl text-center my-8">
         {id === undefined ? 'Cadastre uma nova categoria' : 'Editar categoria'}
       </h1>
-
+  
       <form className="w-1/2 flex flex-col gap-4" onSubmit={gerarNovaCategoria}>
         <div className="flex flex-col gap-2">
         
         <label htmlFor="nome">Nome</label>
-          <input
-            type="text"
-            placeholder="Ex.: Produtos orgânicos e sustentáveis"
-            name='nome'
-            className="border-2 border-slate-700 rounded p-2"
-            value={categoria.nome}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-          />
-
-          <label htmlFor="subcategoria">Subcategoria</label>
-          <input
-            type="text"
-            placeholder="Ex.: Frutas e vegetais orgânicos"
-            name='subcategoria'
-            className="border-2 border-slate-700 rounded p-2"
-            value={categoria.subcategoria}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-          />
+        <input
+          type="text"
+          placeholder="Ex.: Produtos orgânicos e sustentáveis"
+          name='nome'
+          className="border-2 border-slate-700 rounded p-2 h-24 sm:h-20 md:h-16 lg:h-14 xl:h-12 2xl:h-10.5"
+          value={categoria.nome}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+        />
+  
+        <label htmlFor="subcategoria">Subcategoria</label>
+        <input
+          type="text"
+          placeholder="Ex.: Frutas e vegetais orgânicos"
+          name='subcategoria'
+          className="border-2 border-slate-700 rounded p-2 h-24 sm:h-20 md:h-16 lg:h-14 xl:h-12 2xl:h-10.5"
+          value={categoria.subcategoria}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+        />
         </div>
         <button
           className="rounded text-slate-100 bg-green-400 hover:bg-green-800 w-1/2 py-2 mx-auto block"
