@@ -104,7 +104,6 @@ function FormularioCategoria() {
         <h1 className="text-4xl text-center my-1 mt-4 text-yellow-900 font-bold" style={{ fontFamily: 'Poppins, sans-serif' }}>
           {id === undefined ? 'Cadastrar uma categoria' : 'Editar a categoria'}
         </h1>
-  
         <div className="w-full flex items-center justify-center">
         <form className="w-full flex flex-grid gap-16 items-center justify-center mt-4" onSubmit={gerarNovaCategoria}>
           <div className="flex flex-col gap-2 w-[60vh]">
