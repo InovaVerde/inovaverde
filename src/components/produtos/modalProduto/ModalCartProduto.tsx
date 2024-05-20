@@ -4,6 +4,7 @@ import CardProdutoCarrinho from "../cardProduto/CardProdutoCarrinho";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { CarrinhoContext } from '../../../contexts/CarrinhoContext';
+import axios from "axios";
 
 
 function ModalCartProduto() {
@@ -17,9 +18,35 @@ function ModalCartProduto() {
   const taxa = carrinho.length === 0 ? 0 : 6.00;
   const total = subtotal + frete + taxa;
 
-  const { usuario, handleLogout } = useContext(AuthContext);
+  const { usuario, setUsuario } = useContext(AuthContext);
   const token = usuario.token;
 
+  async function comprar() {
+    const compraData = {
+      userId: usuario.id,
+      itensCompra: carrinho.map(item => ({
+        produtoId: item.id,
+        quantidade: item.quantidadeCarrinho
+      }))
+    };
+  
+    try {
+      const response = await axios.post('http://localhost:8080/compras', compraData, {
+        headers: {
+          'Authorization': token
+        }
+      });
+  
+      // Atualizar o crédito de carbono do usuário
+      const novoUsuario = {...usuario, creditoCarbono: usuario.creditoCarbono + total}; // atualiza o crédito de carbono
+  
+      setUsuario(novoUsuario); // Atualiza o estado do usuário
+  
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   useEffect(() => {
     if (token === '') {
@@ -156,18 +183,12 @@ function ModalCartProduto() {
                           </p>
                         </div>
                         <button
-                          onClick={() => setShow(!show)}
+                          onClick={comprar}
                           className="text-base leading-none w-full py-5 bg-green-800 border-green-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-800 text-white rounded-lg hover:bg-green-600"
                         >
                           Comprar
                         </button>
 
-                        <button
-                          onClick={handleShowCart}
-                          className="text-base leading-none w-full py-5 bg-blue-800 border-blue-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-800 text-white rounded-lg hover:bg-blue-600"
-                        >
-                          Mostrar Carrinho
-                        </button>
                       </div>
                     </div>
                   </div>
