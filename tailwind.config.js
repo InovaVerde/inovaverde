@@ -26,6 +26,9 @@ module.exports = {
         'lucida': ['Lucida Sans', 'sans-serif'],
         'impact': ['Impact', 'sans-serif'],
         'courier': ['Courier New', 'monospace'],
+      },
+      margin: {
+        'mb-128': '32rem',
       }
     },
   },
