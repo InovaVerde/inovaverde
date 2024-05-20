@@ -88,7 +88,7 @@ export default function Example() {
                 </a>
 
                 {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3 z-0">
+                <Menu as="div" className="relative ml-3" style={{ zIndex: 10 }}>
                   <div className="z-50">
                     <Menu.Button className="z-50 relative flex rounded-full bg-green-800 text-sm hover:border-green-300 hover:border-2">
                       <span className="z-50 absolute -inset-1.5" />

@@ -45,7 +45,7 @@ function DeletarCategoria() {
       <div className='flex flex-col justify-center items-center min-h-screen bg-nature w-full'>
         <div className="lg:mt-20 w-full flex flex-col lg:flex-row justify-center items-center">
           {/* Imagem à esquerda */}
-          <div className="flex w-full lg:w-1/3 justify-start items-center mb-8 mt-8 lg:mt-0 lg:mb-0">
+          <div className="flex w-full lg:w-1/3 justify-start items-center mb-8 mt-8 lg:mt-0 xl:mb-16">
             <img
               src="https://static.vecteezy.com/system/resources/previews/019/053/688/original/blue-macaw-illustration-png.png"
               alt="Imagem 1"
@@ -58,7 +58,7 @@ function DeletarCategoria() {
             <CardDefault />
           </div>
           {/* Imagem à direita */}
-          <div className="flex w-full lg:w-1/3 justify-end items-center mb-8 mt-8 lg:mt-0 lg:mb-0">
+          <div className="flex w-full lg:w-1/3 justify-end items-center mb-8 mt-8 lg:mt-0 xl:mb-16">
             <img
               src="https://static.vecteezy.com/system/resources/previews/019/053/688/original/blue-macaw-illustration-png.png"
               alt="Imagem 2"
