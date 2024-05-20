@@ -40,7 +40,7 @@ function ModalCartProduto() {
   return (
     <>
       <div>
-        <div className="items-center grid justify-center ">
+        <div className="items-center grid justify-center" style={{ zIndex: 1000 }}>
           <button onClick={() => setShow(!show)}>
           {carrinho.length !== 0 && (
   <p className="flex h-1 w-1 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-white ml-5">
