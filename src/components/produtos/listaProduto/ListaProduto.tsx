@@ -69,7 +69,7 @@ function ListaProdutos() {
       <div className="flex flex-wrap justify-center items-center w-full gap-28">
         <input
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="border-2 border-slate-700 rounded p-2 w-full md:w-1/2"
+          className="border-2 border-slate-700 rounded-lg p-2 w-full md:w-1/2"
         ></input>
         <select
           onChange={(e) => setSelectedCategory(e.target.value)}
@@ -77,7 +77,7 @@ function ListaProdutos() {
           id="categoria"
           className="border p-2 border-slate-800 rounded w-full md:w-1/12"
         >
-          <option value="">-- Categorias --</option>
+          <option value="">Categorias</option>
           {categorias.map((categoria) => (
             <>
               <option value={categoria.nome}>{categoria.nome}</option>
@@ -85,7 +85,7 @@ function ListaProdutos() {
           ))}
         </select>
         <button
-          className="btn btn-primary bg-yellow-600 text-white rounded-lg w-44 h-9 py-0.5 text-center my-4 hover:bg-yellow-200 hover:text-yellow-900 md:w-1/24"
+          className="btn btn-primary bg-green-600 text-white rounded-lg w-44 h-9 py-0.5 text-center my-4 hover:bg-green-200 hover:text-green-900 md:w-1/24"
           onClick={buscarProdutos}
         >
           Pesquisar
@@ -93,10 +93,10 @@ function ListaProdutos() {
       </div>
 
       <div className="absolute flex mt-5 w-screen justify-center items-center">
-    {produtos.length === 0 && (
-      <h1 style={{ fontSize: '1.5em' }}>Nenhum produto foi encontrado!</h1>
-    )}
-</div>
+        {produtos.length === 0 && (
+          <h1 style={{ fontSize: '1.5em' }}>Nenhum produto foi encontrado!</h1>
+        )}
+      </div>
       <div className="my-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 place-items-center">
         {produtos.map((produto) => (
           <CardProduto key={produto.id} post={produto} />
