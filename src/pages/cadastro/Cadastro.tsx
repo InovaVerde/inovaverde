@@ -1,155 +1,187 @@
-import { ChangeEvent, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Usuario from '../../models/Usuario'
-import { cadastrarUsuario } from '../../services/Service'
-import './Cadastro.css'
+import React, { ChangeEvent, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
+const Cadastro: React.FC = () => {
+  const [usuario, setUsuario] = useState({
+    nome: '',
+    usuario: '',
+    foto: '',
+    senha: '',
+    confirmarSenha: '',
+  });
 
-function Cadastro() {
+  const [mostrarSenha, setMostrarSenha] = useState(false);
+  const [mostrarConfirmarSenha, setMostrarConfirmarSenha] = useState(false);
 
-    const navigate = useNavigate()
-  
-    const [confirmaSenha, setConfirmaSenha] = useState<string>("")
-  
-    const [usuario, setUsuario] = useState<Usuario>({
-      id: 0,
+  const [senhaValida, setSenhaValida] = useState(false);
+  const [confirmarSenhaValida, setConfirmarSenhaValida] = useState(false);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUsuario((prevUsuario) => ({
+      ...prevUsuario,
+      [name]: value,
+    }));
+
+    if (name === 'senha') {
+      const isValid = value.length >= 8;
+      setSenhaValida(isValid);
+      setConfirmarSenhaValida(value === usuario.confirmarSenha);
+    } else if (name === 'confirmarSenha') {
+      setConfirmarSenhaValida(value === usuario.senha);
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setUsuario({
       nome: '',
       usuario: '',
-      senha: '',
       foto: '',
-      creditoCarbono: 0
-    })
-  
-    const [usuarioResposta, setUsuarioResposta] = useState<Usuario>({
-      id: 0,
-      nome: '',
-      usuario: '',
       senha: '',
-      foto: '',
-      creditoCarbono: 0
-    })
-  
-    useEffect(() => {
-      if (usuarioResposta.id !== 0) {
-        back()
-      }
-    }, [usuarioResposta])
-  
-    function back() {
-      navigate('/login')
-    }
-  
-    function handleConfirmarSenha(e: ChangeEvent<HTMLInputElement>) {
-      setConfirmaSenha(e.target.value)
-    }
-  
-    function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
-      setUsuario({
-        ...usuario,
-        [e.target.name]: e.target.value
-      })
-    }
-  
-    async function cadastrarNovoUsuario(e: ChangeEvent<HTMLFormElement>) {
-      e.preventDefault()
-  
-      if (confirmaSenha === usuario.senha && usuario.senha.length >= 8) {
-  
-        try {
-          await cadastrarUsuario(`/usuarios/cadastrar`, usuario, setUsuarioResposta)
-          alert('Usuário cadastrado com sucesso')
-  
-        } catch (error) {
-          alert('Erro ao cadastrar o Usuário')
-        }
-  
-      } else {
-        alert('Dados inconsistentes. Verifique as informações de cadastro.')
-        setUsuario({ ...usuario, senha: "" })
-        setConfirmaSenha("")
-      }
-    }
-  
-    return (
-      <>
-        <div className="grid grid-cols-1 lg:grid-cols-2 h-screen place-items-center font-bold">
-        <div className="fundoCadastro hidden lg:block">
-            
+      confirmarSenha: '',
+    });
+    setSenhaValida(false);
+    setConfirmarSenhaValida(false);
+  };
+
+  return (
+    <div className="flex justify-center items-center min-h-screen relative">
+      <div
+        className="absolute inset-0 bg-cover bg-center z-0"
+        style={{ backgroundImage: "url('/cadastro.jpg')" }}
+      />
+      <form onSubmit={handleSubmit} className="max-w-md w-full bg-white bg-opacity-80 p-8 rounded-lg shadow-lg my-8 z-10">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-8 text-center">Cadastro</h2>
+        <div className="mb-4">
+          <label htmlFor="nome" className="block text-gray-700 font-semibold mb-2">
+            Nome<span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            id="nome"
+            name="nome"
+            value={usuario.nome}
+            onChange={handleChange}
+            className="w-full px-4 py-2 rounded-lg border border-gray-500 focus:border-blue-500 focus:outline-none"
+            placeholder="Nome"
+          />
         </div>
-          <form className='flex justify-center items-center flex-col w-2/3 gap-3' onSubmit={cadastrarNovoUsuario}>
-            <h2 className='text-slate-900 text-5xl'>Cadastrar</h2>
-            <div className="flex flex-col w-full">
-            <label htmlFor="nome">Nome<span className="red-star">*</span></label>
-              <input
-                type="text"
-                id="nome"
-                name="nome"
-                placeholder="Nome"
-                className="border-2 border-slate-700 rounded p-2"
-                value={usuario.nome} 
-                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-              />
-            </div>
-            <div className="flex flex-col w-full">
-              <label htmlFor="usuario">Usuario<span className="red-star">*</span></label>
-              <input
-                type="text"
-                id="usuario"
-                name="usuario"
-                placeholder="usuario@email.com"
-                className="border-2 border-slate-700 rounded p-2"
-                value={usuario.usuario} 
-                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-              />
-            </div>
-            <div className="flex flex-col w-full">
-              <label htmlFor="foto">Foto</label>
-              <input
-                type="text"
-                id="foto"
-                name="foto"
-                placeholder="Foto"
-                className="border-2 border-slate-700 rounded p-2"
-                value={usuario.foto} 
-                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-              />
-            </div>
-            <div className="flex flex-col w-full">
-              <label htmlFor="senha">Senha<span className="red-star">*</span></label>
-              <input
-                type="password"
-                id="senha"
-                name="senha"
-                placeholder="Senha"
-                className="border-2 border-slate-700 rounded p-2"
-                value={usuario.senha} 
-                onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
-              />
-            </div>
-            <div className="flex flex-col w-full">
-              <label htmlFor="confirmarSenha">Confirmar Senha<span className="red-star">*</span></label>
-              <input
-                type="password"
-                id="confirmarSenha"
-                name="confirmarSenha"
-                placeholder="Confirmar Senha"
-                className="border-2 border-slate-700 rounded p-2"
-                value={confirmaSenha}
-                onChange={(e: ChangeEvent<HTMLInputElement>) => handleConfirmarSenha(e)}
-              />
-            </div>
-            <div className="flex justify-around w-full gap-8">
-              <button className='rounded text-white bg-red-400 hover:bg-red-700 w-1/2 py-2' onClick={back}>
-                Cancelar
-              </button>
-              <button className='rounded text-white bg-green-400 hover:bg-green-900 w-1/2 py-2' type='submit'>
-                Cadastrar
-              </button>
-            </div>
-          </form>
+        <div className="mb-4">
+          <label htmlFor="usuario" className="block text-gray-700 font-semibold mb-2">
+            Usuário<span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            id="usuario"
+            name="usuario"
+            value={usuario.usuario}
+            onChange={handleChange}
+            className="w-full px-4 py-2 rounded-lg border border-gray-500 focus:border-blue-500 focus:outline-none"
+            placeholder="usuario@email.com"
+          />
         </div>
-      </>
-    )
-  }
-  
-  export default Cadastro
+        <div className="mb-4">
+          <label htmlFor="foto" className="block text-gray-700 font-semibold mb-2">
+            Foto
+          </label>
+          <input
+            type="text"
+            id="foto"
+            name="foto"
+            value={usuario.foto}
+            onChange={handleChange}
+            className="w-full px-4 py-2 rounded-lg border border-gray-500 focus:border-blue-500 focus:outline-none"
+            placeholder="Foto"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="senha" className="block text-gray-700 font-semibold mb-2">
+            Senha<span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <input
+              type={mostrarSenha ? 'text' : 'password'}
+              id="senha"
+              name="senha"
+              value={usuario.senha}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded-lg border border-gray-500 focus:border-blue-500 focus:outline-none"
+              placeholder="Senha"
+              aria-describedby="senha-feedback"
+            />
+            <button
+              type="button"
+              onClick={() => setMostrarSenha(!mostrarSenha)}
+              className="absolute top-0 right-0 px-3 py-2"
+              aria-label={mostrarSenha ? "Esconder senha" : "Mostrar senha"}
+            >
+              <FontAwesomeIcon icon={mostrarSenha ? faEye : faEyeSlash} />
+            </button>
+          </div>
+          {usuario.senha && (
+            <div id="senha-feedback" className="text-sm mt-1" aria-live="polite">
+              {senhaValida ? (
+                <span className="text-green-500">✓ Senha válida</span>
+              ) : (
+                <span className="text-red-500">✘ Mínimo 8 caracteres</span>
+              )}
+            </div>
+          )}
+        </div>
+        <div className="mb-4">
+          <label htmlFor="confirmarSenha" className="block text-gray-700 font-semibold mb-2">
+            Confirmar Senha<span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <input
+              type={mostrarConfirmarSenha ? 'text' : 'password'}
+              id="confirmarSenha"
+              name="confirmarSenha"
+              value={usuario.confirmarSenha}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded-lg border border-gray-500 focus:border-blue-500 focus:outline-none"
+              placeholder="Confirmar Senha"
+              aria-describedby="confirmar-senha-feedback"
+            />
+            <button
+              type="button"
+              onClick={() => setMostrarConfirmarSenha(!mostrarConfirmarSenha)}
+              className="absolute top-0 right-0 px-3 py-2"
+              aria-label={mostrarConfirmarSenha ? "Esconder confirmação de senha" : "Mostrar confirmação de senha"}
+            >
+              <FontAwesomeIcon icon={mostrarConfirmarSenha ? faEye : faEyeSlash} />
+            </button>
+          </div>
+          {usuario.confirmarSenha && (
+            <div id="confirmar-senha-feedback" className="text-sm mt-1" aria-live="polite">
+              {confirmarSenhaValida ? (
+                <span className="text-green-500">✓ Senha confirmada</span>
+              ) : (
+                <span className="text-red-500">✘ Senhas não coincidem</span>
+              )}
+            </div>
+          )}
+        </div>
+        <button
+          type="submit"
+          className="w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition duration-300"
+          disabled={!senhaValida || !confirmarSenhaValida}
+        >
+          Cadastrar
+        </button>
+        <p className="mt-4 text-gray-700 text-base text-center">
+          Já tem cadastro?{' '}
+          <Link to="/login" className="font-semibold text-green-600 hover:underline">
+            Faça login aqui
+          </Link>
+          .
+        </p>
+      </form>
+    </div>
+  );
+};
+
+export default Cadastro;
