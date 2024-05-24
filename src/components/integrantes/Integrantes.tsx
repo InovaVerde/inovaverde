@@ -2,8 +2,8 @@ interface Integrante {
   name: string;
   usuario: string;
   foto: string;
-  linkLinkedin: string;
-  linkGithub: string;
+  linkLinkedin?: string;
+  linkGithub?: string;
 }
 
 function Integrantes(integrante: Integrante) {
