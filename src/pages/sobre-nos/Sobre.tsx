@@ -1,25 +1,43 @@
-import React from 'react'
-import ecommerce from '../../assets/imgecommerce.jpg';
+import React from 'react';
+import sobre from '../../assets/sobre.jpg';
 
 function Sobre() {
   return (
-    <>
+    <div className="container mx-auto py-10 px-6 md:px-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="p-4 flex flex-col items-center">
+          <h4 className="text-green-800 font-serif text-2xl font-bold mb-4">Sobre a Inova Verde</h4>
+          <img src={sobre} alt="E-commerce" className="rounded-md mt-2" />
+        </div>
+        <div className="p-4">
 
-<div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '10px', paddingTop: '20px', paddingRight: '50px', paddingBottom: '40px', paddingLeft: '50px' }}>
-  <div style={{ padding: '10px' }}>
-  <h4 className="text-blue-900 font-serif text-2xl font-bold">Quem somos</h4>
-                <img src={ecommerce} alt="" className='z-0 mt-2' />
-  </div>
-  <div style={{ padding: '10px' }}>
-  <p className="text-justify mt-8">Somos uma empresa apaixonada por sustentabilidade e inovação, buscando soluções criativas para os desafios ambientais atuais. Nossa missão é tornar o mundo um lugar melhor, promovendo o consumo consciente e a preservação do meio ambiente.
-                Nosso e-commerce oferece uma ampla variedade de produtos agrícolas e naturais, cuidadosamente selecionados para promover a sustentabilidade em todas as etapas. Acreditamos que cada escolha conta, e é por isso que incentivamos nossos clientes a fazerem compras conscientes e a participarem ativamente na redução das emissões de carbono.
-                Ao comprar conosco, você não apenas adquire produtos de alta qualidade, mas também recebe cashback na forma de créditos de carbono, que podem ser usados para contribuir com projetos ambientais ou mantidos para reduzir sua própria pegada de carbono.
-  </p>
-  </div>
-</div>
+          <h4 className="text-xl font-semibold mt-4 text-green-600">O Que Fazemos</h4>
+          <p className="mt-2 text-justify">
+            Nosso e-commerce oferece uma ampla variedade de produtos agrícolas e naturais, cuidadosamente selecionados para garantir a sustentabilidade em todas as etapas. Acreditamos que cada escolha conta e incentivamos nossos clientes a fazerem compras conscientes.
+          </p>
 
-    </>
-  )
+          <h4 className="text-xl font-semibold mt-4 text-green-600">Nossos Benefícios</h4>
+          <p className="mt-2 text-justify">
+            Ao comprar conosco, você adquire produtos excelentes e recebe cashback em créditos de carbono. Esses créditos podem ser usados para apoiar projetos ambientais ou para reduzir sua própria pegada de carbono.
+          </p>
+
+          <h4 className="text-xl font-semibold mt-4 text-green-600">Junte-se a Nós</h4>
+          <p className="mt-2 text-justify">
+            Participe da mudança. Faça suas compras de forma consciente e contribua para um futuro sustentável.
+          </p>
+
+          <hr className="my-4" />
+
+          <h4 className="text-xl font-semibold text-green-600">Entre em Contato</h4>
+          <p className="mt-2 text-justify">
+            Se tiver dúvidas, estamos aqui para ajudar!
+          </p>
+
+          <hr className="my-4" />
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default Sobre
+export default Sobre;

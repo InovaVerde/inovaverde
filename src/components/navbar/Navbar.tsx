@@ -88,11 +88,11 @@ export default function Example() {
                 </a>
 
                 {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3 z-0">
-                  <div className="z-2">
-                    <Menu.Button className="z-2 relative flex rounded-full bg-green-800 text-sm hover:border-green-300 hover:border-2">
-                      <span className="z-2 absolute -inset-1.5" />
-                      <span className="sr-only z-2">Open user menu</span>
+                <Menu as="div" className="relative ml-3" style={{ zIndex: 10 }}>
+                  <div className="z-50">
+                    <Menu.Button className="z-50 relative flex rounded-full bg-green-800 text-sm hover:border-green-300 hover:border-2">
+                      <span className="z-50 absolute -inset-1.5" />
+                      <span className="sr-only z-50">Open user menu</span>
                       <Avatar foto={usuario.foto} bordercolour="black" size="small"/>
                     </Menu.Button>
                   </div>
@@ -106,14 +106,14 @@ export default function Example() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 z-2 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
                           <Link
                             to="/perfil"
                             className={classNames(
                               active ? "bg-green-100" : "",
-                              "block px-4 py-2 text-sm text-green-700 border-t border-b"
+                              "block px-4 py-2 text-sm text-green-700 border-t border-b rounded-t-md hover:border-green-500"
                             )}
                           >
                             <div
@@ -132,7 +132,7 @@ export default function Example() {
                                     bordercolour="black"
                                   />
                                 </Link>
-                                <span>{usuario.usuario}</span>
+                                <span className="mt-4">{usuario.usuario}</span>
                                 <span className="font-bold">Créditos: {usuario.creditoCarbono}</span>
                               </div>
                             </div>
@@ -146,7 +146,7 @@ export default function Example() {
                             to="/home"
                             className={classNames(
                               active ? "bg-green-100" : "",
-                              "block px-4 py-2 text-sm text-green-700 border-t border-b"
+                              "block px-4 py-2 text-sm text-green-700 border-t border-b transition-all duration-200 hover:font-bold hover:border-green-500 hover:text-base"
                             )}
                           >
                             Home
@@ -160,7 +160,7 @@ export default function Example() {
                             to="/produtos"
                             className={classNames(
                               active ? "bg-green-100" : "",
-                              "block px-4 py-2 text-sm text-green-700 border-t border-b"
+                              "block px-4 py-2 text-sm text-green-700 border-t border-b transition-all duration-200 hover:font-bold hover:border-green-500 hover:text-base"
                             )}
                           >
                             Produtos
@@ -175,7 +175,7 @@ export default function Example() {
         to="/cadastroProduto"
         className={classNames(
           active ? "bg-green-100" : "",
-          "block px-4 py-2 text-sm text-green-700 border-t border-b"
+          "block px-4 py-2 text-sm text-green-700 border-t border-b hover:font-bold transition-all duration-200 hover:border-green-500 hover:text-base"
         )}
       >
         Criar Produto
@@ -190,7 +190,7 @@ export default function Example() {
                             to="/categorias"
                             className={classNames(
                               active ? "bg-green-100" : "",
-                              "block px-4 py-2 text-sm text-green-700 border-t border-b"
+                              "block px-4 py-2 text-sm text-green-700 border-t border-b transition-all duration-200 hover:font-bold hover:border-green-500 hover:text-base"
                             )}
                           >
                             Categorias
@@ -205,7 +205,7 @@ export default function Example() {
                             to="/cadastroCategoria"
                             className={classNames(
                               active ? "bg-green-100" : "",
-                              "block px-4 py-2 text-sm text-green-700 border-t border-b"
+                              "block px-4 py-2 text-sm text-green-700 border-t border-b transition-all duration-200 hover:font-bold hover:border-green-500 hover:text-base"
                             )}
                           >
                             Criar Categoria
@@ -220,7 +220,7 @@ export default function Example() {
                             to="/contato"
                             className={classNames(
                               active ? "bg-green-100" : "",
-                              "block px-4 py-2 text-sm text-green-700 border-t border-b"
+                              "block px-4 py-2 text-sm text-green-700 border-t border-b transition-all duration-200 hover:font-bold hover:border-green-500 hover:text-base"
                             )}
                           >
                             Contato
@@ -234,7 +234,7 @@ export default function Example() {
                             to="/integrantes"
                             className={classNames(
                               active ? "bg-green-100" : "",
-                              "block px-4 py-2 text-sm text-green-700 border-t border-b"
+                              "block px-4 py-2 text-sm text-green-700 border-t border-b transition-all duration-200 hover:font-bold hover:border-green-500 hover:text-base"
                             )}
                           >
                             Integrantes
@@ -248,7 +248,7 @@ export default function Example() {
                             to="/sobre"
                             className={classNames(
                               active ? "bg-green-100" : "",
-                              "block px-4 py-2 text-sm text-green-700 border-t border-b"
+                              "block px-4 py-2 text-sm text-green-700 border-t border-b transition-all duration-200 hover:font-bold hover:border-green-500 hover:text-base"
                             )}
                           >
                             Sobre
@@ -261,8 +261,8 @@ export default function Example() {
                           <Link
                             to="/"
                             className={classNames(
-                              active ? "bg-green-100" : "",
-                              "block px-4 py-2 text-sm text-green-700 border-t border-b"
+                              active ? "bg-red-100" : "",
+                              "block px-4 py-2 text-sm text-red-700 border-t transition-all duration-200 hover:font-bold hover:border-red-500 rounded-b-md hover:text-base"
                             )}
                             onClick={() => logout()}
                           >

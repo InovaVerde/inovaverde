@@ -1,18 +1,17 @@
-import { useContext, useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router'
-import { AuthContext } from '../../../contexts/AuthContext'
-import Categoria from '../../../models/Categoria'
-import { buscar, deletar } from '../../../services/Service'
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router';
+import { AuthContext } from '../../../contexts/AuthContext';
+import Categoria from '../../../models/Categoria';
+import { buscar } from '../../../services/Service';
+import { CardDefault } from './CardDefault';
+import '../formularioCategoria/FormularioCategoria.css';
 
 function DeletarCategoria() {
-    const [categoria, setCategoria] = useState<Categoria>({} as Categoria)
-
-    const navigate = useNavigate()
-
-    const { id } = useParams<{ id: string }>()
-
-    const { usuario, handleLogout } = useContext(AuthContext)
-    const token = usuario.token
+    const [, setCategoria] = useState<Categoria>({} as Categoria);
+    const navigate = useNavigate();
+    const { id } = useParams<{ id: string }>();
+    const { usuario, handleLogout } = useContext(AuthContext);
+    const token = usuario.token;
 
     async function buscarPorId(id: string) {
         try {
@@ -20,67 +19,55 @@ function DeletarCategoria() {
                 headers: {
                     'Authorization': token
                 }
-            })
+            });
         } catch (error: any) {
             if (error.toString().includes('403')) {
-                alert('O token expirou, favor logar novamente.')
-                handleLogout()
+                alert('O token expirou, favor logar novamente.');
+                handleLogout();
             }
         }
     }
 
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado.')
-            navigate('/login')
+            alert('Você precisa estar logado.');
+            navigate('/login');
         }
-    }, [token])
+    }, [token, navigate]);
 
     useEffect(() => {
         if (id !== undefined) {
-            buscarPorId(id)
+            buscarPorId(id);
         }
-    }, [id])
+    }, [id]);
 
-    function retornar() {
-        navigate("/categorias")
-    }
-
-    async function deletarCategoria() {
-        try {
-            await deletar(`/categorias/${id}`, {
-                headers: {
-                    'Authorization': token
-                }
-            })
-
-            alert('Categoria apagada com sucesso.')
-
-        } catch (error) {
-            alert('Erro ao apagar o Categoria')
-        }
-
-        retornar()
-    }
     return (
-        <div className='container w-1/3 mx-auto'>
-            <h1 className='text-4xl text-center my-4'>Deletar categoria</h1>
-
-            <p className='text-center font-semibold mb-4'>Você tem certeza de que deseja apagar a categoria?</p>
-
-            <div className='border flex flex-col rounded-2xl overflow-hidden justify-between'>
-                <header className='py-2 px-6 bg-green-600 text-white font-bold text-2xl'>Categoria</header>
-                <p className='p-8 text-3xl bg-slate-200 h-full'>{categoria.nome}</p>
-                <p className='p-8 text-3xl bg-slate-200 h-full'>{categoria.subcategoria}</p>
-                <div className="flex">
-                    <button className='text-slate-100 bg-red-400 hover:bg-red-600 w-full py-2' onClick={retornar}>Não</button>
-                    <button className='w-full text-slate-100 bg-green-400 hover:bg-green-600 flex items-center justify-center' onClick={deletarCategoria}>
-                        Sim
-                    </button>
-                </div>
-            </div>
+      <div className='flex flex-col justify-center items-center min-h-screen bg-nature w-full'>
+        <div className="lg:mt-20 w-full flex flex-col lg:flex-row justify-center items-center">
+          {/* Imagem à esquerda */}
+          <div className="flex w-full lg:w-1/3 justify-start items-center mb-8 mt-8 lg:mt-0 xl:mb-16">
+            <img
+              src="https://static.vecteezy.com/system/resources/previews/019/053/688/original/blue-macaw-illustration-png.png"
+              alt="Imagem 1"
+              className={`${window.innerWidth < 1024 ? 'w-1/4 mb-8 mt-8' : 'w-1/2'} lg:w-auto h-auto flip-horizontal`}
+              style={{ transform: "scaleX(-1)" }}
+            />
+          </div>
+          {/* Conteúdo central */}
+          <div className='flex flex-col justify-center mb-8 lg:mb-96 md:items-center px-12'> {/* Adicionei uma margem superior menor aqui */}
+            <CardDefault />
+          </div>
+          {/* Imagem à direita */}
+          <div className="flex w-full lg:w-1/3 justify-end items-center mb-8 mt-8 lg:mt-0 xl:mb-16">
+            <img
+              src="https://static.vecteezy.com/system/resources/previews/019/053/688/original/blue-macaw-illustration-png.png"
+              alt="Imagem 2"
+              className={`${window.innerWidth < 1024 ? 'w-1/4 mb-8 mt-8' : 'w-1/2'} lg:w-auto h-auto`}
+            />
+          </div>
         </div>
-    )
+      </div>
+    );
 }
 
-export default DeletarCategoria
+export default DeletarCategoria;
