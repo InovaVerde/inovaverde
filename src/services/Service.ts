@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction } from "react";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL
-})
+}) 
 
 export const cadastrarUsuario = async(url: string, dados: object, setDados: Dispatch<SetStateAction<any>>) => {
   const resposta = await api.post(url, dados)
