@@ -99,20 +99,20 @@ function FormularioCategoria() {
 
   return (
     <div className="bg-nature min-h-[80vh] pt-36 pb-36">
-      <div className="container flex flex-col items-center mx-auto min-w-[10vw] max-w-[90vw] px-10 bg-white bg-opacity-40 pb-10 border-black border-2 rounded-3xl">
-        <h1 className="text-4xl text-center my-1 mt-4 text-yellow-900 font-bold" style={{ fontFamily: 'Poppins, sans-serif' }}>
-          {id === undefined ? 'Cadastrar uma categoria' : 'Editar a categoria'}
-        </h1>
-        <div className="w-full flex items-center justify-center">
+      <div className="container flex flex-col items-center mx-auto min-w-[10vw] max-w-[55vw] bg-white bg-opacity-40 pb-10 border-black border-2 rounded-3xl">
+      <header className={`py-2 text-white font-bold text-2xl justify-center text-center w-full ${id !== undefined ? 'bg-yellow-500' : 'bg-green-600'}`} style={{borderTopLeftRadius: '22px', borderTopRightRadius: '22px', fontFamily: 'Poppins, sans-serif'}}>
+    {id !== undefined ? "Editar Categoria" : "Cadastre uma categoria"}
+</header>
+        <div className="w-full flex items-center justify-center px-10">
           <form className="w-full flex flex-col gap-16 items-center justify-center mt-4" onSubmit={gerarNovaCategoria}>
-            <div className="flex flex-col gap-12 lg:gap-20 w-full lg:flex-row">
-              <div className="flex flex-col w-full lg:w-3/4">
+          <div className="flex flex-col gap-12 lg:gap-20 w-full lg:flex-row items-center">
+  <div className="flex flex-col w-full lg:w-3/4">
                 <label htmlFor="nome" style={{ fontFamily: 'Poppins, sans-serif' }} className='mt-4 text-black'>Nome</label>
                 <input
                   type="text"
                   placeholder="Ex.: Produtos orgânicos e sustentáveis"
                   name="nome"
-                  className="border-2 border-slate-700 rounded p-2 h-24 sm:h-20 md:h-16 lg:h-14 xl:h-12 2xl:h-10.5 w-full"
+                  className="border-2 border-slate-700 rounded p-2 h-10.5 w-full"
                   value={categoria.nome}
                   onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                   style={{ fontFamily: 'Poppins, sans-serif' }}
@@ -122,23 +122,23 @@ function FormularioCategoria() {
                   type="text"
                   placeholder="Ex.: Frutas e vegetais orgânicos"
                   name="subcategoria"
-                  className="border-2 border-slate-700 rounded p-2 h-24 sm:h-20 md:h-16 lg:h-14 xl:h-12 2xl:h-10.5 w-full"
+                  className="border-2 border-slate-700 rounded p-2 h-10.5 w-full"
                   value={categoria.subcategoria}
                   onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                   style={{ fontFamily: 'Poppins, sans-serif' }}
                 />
-              </div>
-              <div className="flex flex-col w-full lg:w-1/6 justify-center items-center lg:mt-8">
-                <button
-                  className={`font-bold rounded-lg w-24 h-24 bg-white text-lg border flex items-center justify-center hover:border-transparent hover:scale-105 transition transform duration-300 ${
-                    id === undefined
-                      ? 'border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white'
-                      : 'border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white'
-                  }`}
-                  type="submit"
-                >
-                  {id === undefined ? (<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+ </div>
+ <div className="flex flex-col w-[10vh] items-center justify-center lg:mt-8 4xl:ml-7">
+    <button
+      className={`font-bold rounded-lg w-24 h-24 bg-white text-lg border flex items-center justify-center hover:border-transparent hover:scale-105 transition transform duration-300 ${
+        id === undefined
+          ? 'border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white'
+          : 'border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-600 hover:text-white'
+      }`}
+      type="submit"
+    >
+                  {id === undefined ? (<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+        <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
       </svg>
       
       ) : (<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">

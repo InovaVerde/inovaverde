@@ -12,8 +12,11 @@ function CardCategorias({categoria}: CardCategoriaProps) {
   const { usuario } = useContext(AuthContext);
   
 return (
-    <div className={`rounded-2xl overflow-hidden pb-12 pt-6 xl:pb-6 mx-auto lg:min-w-[30vw] lg:max-w-[30vw] bg-white bg-opacity-40 min-w-[70vw] max-w-[70vw] lg:flex lg:flex-col lg:items-center border-2 border-black`}>
+    <div className={`rounded-2xl overflow-hidden pb-12 xl:pb-6 mx-auto lg:min-w-[30vw] lg:max-w-[30vw] bg-white bg-opacity-40 min-w-[70vw] max-w-[70vw] lg:flex lg:flex-col lg:items-center border-2 border-black`}>
       <div className="w-full">
+      <header className='py-2 px-6 mb-4 bg-yellow-900 text-white font-bold text-2xl justify-center text-center' style={{ fontFamily: 'Poppins, sans-serif' }}>
+          Deletar Categoria
+          </header>
         <div className={`xl:grid xl:grid-cols-2 mb-4`}>
           <div className="flex justify-center xl:justify-start xl:pl-10 xl:mb-8 w-full mt-6">
             <img

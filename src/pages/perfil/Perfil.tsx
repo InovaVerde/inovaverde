@@ -1,5 +1,4 @@
 import { useContext, useEffect } from "react";
-import loginLogo from "../../assets/sustainability.jpg";
 // import { buscar } from '../../services/Service'
 import { useNavigate } from "react-router-dom";
 // import UsuarioLogin from '../../models/UsuarioLogin';
@@ -24,17 +23,17 @@ function Perfil() {
   }
 
   return (
-    <div className="background">
-      <div className="glass z-2 container mx-auto my-8 rounded-2xl overflow-hidden flex">
-        <div className="my-5 mx-5 flex items-center justify-center z-[-1]">
+    <div className="background flex flex-col justify-center items-center min-h-screen">
+
+      <div className="glass z-2 container mx-auto rounded-2xl overflow-hidden flex gap-16 ">
+        <div className="my-5 ml-20 flex items-center justify-center z-[-1]">
           <div className="flex items-center flex-col gap-2">
             <div className="w-[10rem] h-[10rem] rounded-xl shadow-3xl ">
               <div className="h-full max-w-sm mx-auto w-30 lg:mx-0 relative -left-8 opacity-40 blur-xl bg-gradient-to-r from-yellow-400 via-green-700 to-green-600"></div>
 
-              <img
-                src={usuario.foto}
-                alt="Foto integrante"
-                className="w-full rounded-xl relative -top-[10rem] "
+              <Avatar
+                foto={usuario.foto}
+                size="profile"
               />
             </div>
 
@@ -43,14 +42,14 @@ function Perfil() {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
+                viewBox="0 0 24"
+                strokeWidth="1.5"
                 stroke="currentColor"
                 className="w-4 h-4 "
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
                 ></path>
               </svg>
@@ -62,9 +61,8 @@ function Perfil() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 h-screen place-items-center font-bold"></div>
-        <form className="flex justify-center items-center flex-col w-2/3 gap-3">
-          <h2 className="text-slate-900 text-5xl">Informações</h2>
+        <form className="flex justify-center items-center flex-col w-2/3 gap-3 py-16">
+          <h2 className="text-slate-900 text-5xl pb-8">Informações</h2>
           <div className="flex flex-col w-full">
             <label htmlFor="nome">
               Nome<span className="red-star">*</span>
