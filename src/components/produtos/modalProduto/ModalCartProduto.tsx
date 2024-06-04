@@ -21,31 +21,15 @@ function ModalCartProduto() {
   const { usuario, setUsuario } = useContext(AuthContext);
   const token = usuario.token;
 
-  async function comprar() {
-    const compraData = {
-      userId: usuario.id,
-      itensCompra: carrinho.map(item => ({
-        produtoId: item.id,
-        quantidade: item.quantidadeCarrinho
-      }))
-    };
-  
-    try {
-      const response = await axios.post('http://localhost:8080/compras', compraData, {
-        headers: {
-          'Authorization': token
-        }
-      });
-  
-      // Atualizar o crédito de carbono do usuário
-      const novoUsuario = {...usuario, creditoCarbono: usuario.creditoCarbono + total}; // atualiza o crédito de carbono
-  
-      setUsuario(novoUsuario); // Atualiza o estado do usuário
-  
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
+  const checkoutPage = () => {
+    // Verifica se o carrinho está vazio
+    if (carrinho.length === 0) {
+      alert('Não há produtos no carrinho.');
+      return;
     }
+    // Fecha o modal
+    setShow(false);
+    navigate('/checkout');
   }
 
   useEffect(() => {
@@ -128,7 +112,7 @@ function ModalCartProduto() {
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <polyline points="15 6 9 12 15 18" />
                       </svg>
-                      <p className="text-sm pl-2 leading-none">Voltar</p>
+                      <p className="text-sm pl-2">Voltar</p>
                     </div>
                     <p className="text-5xl font-black leading-10 text-green-800 pt-3">
                       Carrinho
@@ -183,7 +167,7 @@ function ModalCartProduto() {
                           </p>
                         </div>
                         <button
-                          onClick={comprar}
+                          onClick={checkoutPage}
                           className="text-base leading-none w-full py-5 bg-green-800 border-green-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-800 text-white rounded-lg hover:bg-green-600"
                         >
                           Comprar

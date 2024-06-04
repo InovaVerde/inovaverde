@@ -1,6 +1,6 @@
 import Produto from '../../../models/Produto';
 import { CarrinhoContext } from '../../../contexts/CarrinhoContext';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 
 
 interface CardProdutoProps {
@@ -8,24 +8,25 @@ interface CardProdutoProps {
 }
 
 function CardProduto({ post }: CardProdutoProps): JSX.Element {
+  const { carrinho, atualizarQuantidadeCarrinho } = useContext(CarrinhoContext);
 
-  const [carrinhoQuantidade, setQuantidade] = useState(1);
+  // Encontre o item correspondente no carrinho
+  const itemCarrinho = carrinho.find(item => item.id === post.id);
 
-  const { atualizarQuantidadeCarrinho } = useContext(CarrinhoContext); // Importe
+  // Use a quantidade do carrinho, se disponível, ou padrão para 1
+  const carrinhoQuantidade = itemCarrinho ? itemCarrinho.quantidadeCarrinho : 1;
 
   const totalProdutoUnico = carrinhoQuantidade * post.preco;
 
   const handleIncrease = () => {
     if (carrinhoQuantidade < post.estoque) {
-      setQuantidade(carrinhoQuantidade + 1);
       atualizarQuantidadeCarrinho(post.id, carrinhoQuantidade + 1);
       console.log(`Quantidade aumentada para ${carrinhoQuantidade + 1}`);
     }
   };
-  
+
   const handleDecrease = () => {
     if (carrinhoQuantidade > 1) {
-      setQuantidade(carrinhoQuantidade - 1);
       atualizarQuantidadeCarrinho(post.id, carrinhoQuantidade - 1);
       console.log(`Quantidade diminuída para ${carrinhoQuantidade - 1}`);
     }

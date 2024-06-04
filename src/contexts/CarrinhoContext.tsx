@@ -7,7 +7,8 @@ type CarrinhoContextType = {
   setCarrinho: React.Dispatch<React.SetStateAction<Produto[]>>;
   adicionarAoCarrinho: (produto: Produto) => void;
   removerDoCarrinho: (idProduto: number) => void;
-  atualizarQuantidadeCarrinho: (idProduto: number, novaQuantidade: number) => void; // Adicione esta linha
+  atualizarQuantidadeCarrinho: (idProduto: number, novaQuantidade: number) => void;
+  limparCarrinho: () => void;
 };
 
 export const CarrinhoContext = createContext<CarrinhoContextType>({
@@ -15,14 +16,18 @@ export const CarrinhoContext = createContext<CarrinhoContextType>({
   setCarrinho: () => {},
   adicionarAoCarrinho: () => {},
   removerDoCarrinho: () => {},
-  atualizarQuantidadeCarrinho: () => {}, // Adicione esta linha
+  atualizarQuantidadeCarrinho: () => {},
+  limparCarrinho: () => {},
 });
 
 export function CarrinhoProvider({ children }) {
 
   const { usuario } = useContext(AuthContext); // Use o AuthContext para obter o usuário atual
 
-
+  const limparCarrinho = () => {
+    setCarrinho([]);
+    sessionStorage.removeItem('carrinho');
+  };
   
   const atualizarQuantidadeCarrinho = (idProduto, novaQuantidade) => {
     setCarrinho(carrinho.map(produto => 
@@ -45,11 +50,21 @@ export function CarrinhoProvider({ children }) {
 
   const adicionarAoCarrinho = (produto) => {
     setCarrinho((carrinhoAtual) => {
-      const novoCarrinho = [...carrinhoAtual, produto];
-      sessionStorage.setItem('carrinho', JSON.stringify(novoCarrinho));
-      return novoCarrinho;
+      // Verifique se o produto já está no carrinho
+      const produtoExistente = carrinhoAtual.find(item => item.id === produto.id);
+  
+      if (produtoExistente) {
+        // Se o produto já estiver no carrinho, atualize a quantidade
+        return carrinhoAtual.map(item =>
+          item.id === produto.id ? { ...item, quantidadeCarrinho: item.quantidadeCarrinho + 1 } : item
+        );
+      } else {
+        // Se o produto não estiver no carrinho, adicione-o com quantidade 1
+        return [...carrinhoAtual, { ...produto, quantidadeCarrinho: 1 }];
+      }
     });
   };
+  
 
   const removerDoCarrinho = (idProduto) => {
     setCarrinho((carrinhoAtual) => {
@@ -59,8 +74,10 @@ export function CarrinhoProvider({ children }) {
     });
   };
 
+  
+
   return (
-    <CarrinhoContext.Provider value={{ carrinho, setCarrinho, adicionarAoCarrinho, removerDoCarrinho, atualizarQuantidadeCarrinho }}>
+    <CarrinhoContext.Provider value={{ carrinho, setCarrinho, adicionarAoCarrinho, removerDoCarrinho, atualizarQuantidadeCarrinho, limparCarrinho }}>
       {children}
     </CarrinhoContext.Provider>
   );
