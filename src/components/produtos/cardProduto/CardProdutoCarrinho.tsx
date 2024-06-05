@@ -45,9 +45,11 @@ function CardProduto({ post }: CardProdutoProps): JSX.Element {
     <div className="w-1/2 flex gap-4">
 
     <img
-      src={post.foto} alt={post.nome}
-      className="rounded-lg w-full h-full object-center object-cover"
-    />
+  src={post.foto} 
+  alt={post.nome}
+  className="rounded-lg object-center object-cover"
+  style={{ maxHeight: '103.36px', minWidth: '139.14px', minHeight: '103.36px', maxWidth: '139.14px' }}
+/>
 
 <button 
   onClick={handleDecrease} 

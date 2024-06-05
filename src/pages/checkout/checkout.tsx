@@ -132,7 +132,7 @@ const handleDeliveryOptionChange = (event) => {
         style={{ minHeight: '100px' }}
         key={produto.id}
       >
-        <img className="m-2 min-h-24 w-28 rounded-md border object-cover object-center" src={produto.foto} alt={produto.nome} />
+        <img className="m-2 min-h-24 w-28 rounded-md border object-cover object-center" style={{ maxHeight: '103.36px', minWidth: '139.14px', minHeight: '103.36px', maxWidth: '139.14px' }} src={produto.foto} alt={produto.nome} />
         <div className="flex w-full flex-col px-4 py-4 mt-4">
           <span className="font-semibold" style={{ fontFamily: 'Poppins, sans-serif' }}>{produto.nome} (Qnt. {produto.quantidadeCarrinho})</span>
           <p className="text-lg font-bold" style={{ fontFamily: 'Poppins, sans-serif' }}>R$ {subtotalProduto.toFixed(2)}</p>

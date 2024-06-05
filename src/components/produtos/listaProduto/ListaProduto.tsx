@@ -22,7 +22,7 @@ function ListaProdutos() {
   const { usuario, handleLogout } = useContext(AuthContext);
   const token = usuario.token;
 
-  const maxSizePage = 2;
+  const maxSizePage = 12;
 
   useEffect(() => {
     if (token === "") {
