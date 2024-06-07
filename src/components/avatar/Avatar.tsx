@@ -1,6 +1,6 @@
 interface AvatarProps {
     foto?: string;
-    size?: "small" | "big" | "extrabig"; // Adiciona a propriedade tamanho com opções de tamanho
+    size?: "small" | "big" | "extrabig" | "profile"; // Adiciona a propriedade tamanho com opções de tamanho
     bordercolour?: "black" | "white";
   }
   
@@ -13,13 +13,15 @@ interface AvatarProps {
   
     // Condicional para definir a classe de tamanho com base na propriedade 'tamanho'
     if (size === "small") {
-        sizeClass = "h-9 w-9 "; // Tamanho pequeno
+        sizeClass = "h-9 w-9"; // Tamanho pequeno
     } else if (size === "big") {
-        sizeClass = "h-20 w-20 transition-all duration-300 hover:scale-110 hover:h-25 hover:w-25 hover:mb-1"; // Tamanho grande
+        sizeClass = "h-20 w-20 rounded-full transition-all duration-300 hover:scale-110 hover:h-25 hover:w-25 hover:mb-1"; // Tamanho grande
     } else if (size === "extrabig") {
-        sizeClass = "h-60 w-60"; // Tamanho extra grande
+        sizeClass = "h-60 w-60 rounded-full"; // Tamanho extra grande
+    } else if (size === "profile") {
+        sizeClass = "w-full h-full rounded-xl relative -top-[10rem]"; // Tamanho extra grande
     } else {
-        sizeClass = "h-11 w-11 "; // Tamanho padrão
+        sizeClass = "h-11 w-11 rounded-full"; // Tamanho padrão
     }
 
     // Condicional para definir a classe de tamanho com base na propriedade 'tamanho'
@@ -33,9 +35,9 @@ interface AvatarProps {
   
     return (
 <img
-  src={(foto !== undefined && foto !== "") ? foto : defaultImage}
+  src={(foto !== undefined && foto.trim() !== "") ? foto : defaultImage}
   alt="Usuário"
-  className={`rounded-full border-white ${sizeClass}`}
+  className={` border-white ${sizeClass}`}
   style={{
     border: `3px solid ${colourBorder}`,
     borderRadius: "50%"
