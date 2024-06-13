@@ -224,27 +224,13 @@ export default function Example() {
                       <Menu.Item>
                         {({ active }) => (
                           <Link
-                            to="/contato"
-                            className={classNames(
-                              active ? "bg-green-100" : "",
-                              "block px-4 py-2 text-sm text-green-700 border-t border-b transition-all duration-200 hover:font-bold hover:border-green-500 hover:text-base"
-                            )}
-                          >
-                            Contato
-                          </Link>
-                        )}
-                      </Menu.Item>
-
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
                             to="/integrantes"
                             className={classNames(
                               active ? "bg-green-100" : "",
                               "block px-4 py-2 text-sm text-green-700 border-t border-b transition-all duration-200 hover:font-bold hover:border-green-500 hover:text-base"
                             )}
                           >
-                            Integrantes
+                            Contato
                           </Link>
                         )}
                       </Menu.Item>
