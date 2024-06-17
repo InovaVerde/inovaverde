@@ -11,7 +11,8 @@ interface ProdutosAvatarProps {
       <img
         src={imageUrl}
         alt="Produto"
-        className={`rounded-t-lg min-h-60 max-h-60`}
+        className={`rounded-t-lg w-full h-full`}
+        style={{ minWidth: '100%', maxHeight: '200px', objectFit: 'fill', minHeight: '200px' }}
       />
     );
   };

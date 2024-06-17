@@ -1,3 +1,17 @@
 .cor-fundo {
-    background-color: #49D668;
+  background-color: #49d668;
+}
+
+.carousel .slide img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.carousel.carousel-slider .control-arrow {
+  display: none;
+}
+
+.carousel .control-dots {
+  display: none;
 }

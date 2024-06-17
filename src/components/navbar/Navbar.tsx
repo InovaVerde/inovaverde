@@ -32,7 +32,7 @@ export default function Example() {
       {({ open }) => (
         <>
           <div className="relative flex h-16 items-center justify-between pl-16 pr-10">
-          <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+            <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
               {/* Mobile menu button*/}
               <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-green-400 hover:bg-green-700 hover:text-white">
                 <span className="absolute -inset-0.5" />
@@ -49,8 +49,9 @@ export default function Example() {
                 className="flex flex-shrink-0 items-center"
                 style={{ color: "white", fontSize: "24px" }}
               >
-                <Link to="/home" style={{ fontFamily: 'Poppins, sans-serif' }}>Inova Verde</Link>
-
+                <Link to="/home" style={{ fontFamily: "Poppins, sans-serif" }}>
+                  Inova Verde
+                </Link>
               </div>
               {usuario.id == 0 && (
                 <div className="hidden sm:flex absolute right-6">
@@ -93,7 +94,11 @@ export default function Example() {
                     <Menu.Button className="z-50 relative flex rounded-full bg-green-800 text-sm hover:border-green-300 hover:border-2">
                       <span className="z-50 absolute -inset-1.5" />
                       <span className="sr-only z-50">Open user menu</span>
-                      <Avatar foto={usuario.foto} bordercolour="black" size="small"/>
+                      <Avatar
+                        foto={usuario.foto}
+                        bordercolour="black"
+                        size="small"
+                      />
                     </Menu.Button>
                   </div>
 
@@ -133,7 +138,9 @@ export default function Example() {
                                   />
                                 </Link>
                                 <span className="mt-4">{usuario.usuario}</span>
-                                <span className="font-bold">Créditos: {usuario.creditoCarbono}</span>
+                                <span className="font-bold">
+                                  Créditos: {usuario.creditoCarbono}
+                                </span>
                               </div>
                             </div>
                           </Link>
@@ -169,20 +176,20 @@ export default function Example() {
                       </Menu.Item>
 
                       {usuario.id === 1 && (
-  <Menu.Item>
-    {({ active }) => (
-      <Link
-        to="/cadastroProduto"
-        className={classNames(
-          active ? "bg-green-100" : "",
-          "block px-4 py-2 text-sm text-green-700 border-t border-b hover:font-bold transition-all duration-200 hover:border-green-500 hover:text-base"
-        )}
-      >
-        Criar Produto
-      </Link>
-    )}
-  </Menu.Item>
-)}
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              to="/cadastroProduto"
+                              className={classNames(
+                                active ? "bg-green-100" : "",
+                                "block px-4 py-2 text-sm text-green-700 border-t border-b hover:font-bold transition-all duration-200 hover:border-green-500 hover:text-base"
+                              )}
+                            >
+                              Criar Produto
+                            </Link>
+                          )}
+                        </Menu.Item>
+                      )}
 
                       <Menu.Item>
                         {({ active }) => (
@@ -199,34 +206,20 @@ export default function Example() {
                       </Menu.Item>
 
                       {usuario.id === 1 && (
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            to="/cadastroCategoria"
-                            className={classNames(
-                              active ? "bg-green-100" : "",
-                              "block px-4 py-2 text-sm text-green-700 border-t border-b transition-all duration-200 hover:font-bold hover:border-green-500 hover:text-base"
-                            )}
-                          >
-                            Criar Categoria
-                          </Link>
-                        )}
-                      </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              to="/cadastroCategoria"
+                              className={classNames(
+                                active ? "bg-green-100" : "",
+                                "block px-4 py-2 text-sm text-green-700 border-t border-b transition-all duration-200 hover:font-bold hover:border-green-500 hover:text-base"
+                              )}
+                            >
+                              Criar Categoria
+                            </Link>
+                          )}
+                        </Menu.Item>
                       )}
-
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            to="/contato"
-                            className={classNames(
-                              active ? "bg-green-100" : "",
-                              "block px-4 py-2 text-sm text-green-700 border-t border-b transition-all duration-200 hover:font-bold hover:border-green-500 hover:text-base"
-                            )}
-                          >
-                            Contato
-                          </Link>
-                        )}
-                      </Menu.Item>
 
                       <Menu.Item>
                         {({ active }) => (
@@ -237,7 +230,7 @@ export default function Example() {
                               "block px-4 py-2 text-sm text-green-700 border-t border-b transition-all duration-200 hover:font-bold hover:border-green-500 hover:text-base"
                             )}
                           >
-                            Integrantes
+                            Contato
                           </Link>
                         )}
                       </Menu.Item>

@@ -19,6 +19,8 @@ import Carrinho from "./pages/cart/Carrinho";
 import Loja from "./pages/loja/Loja";
 import ListaIntegrantes from "./pages/listaIntegrantes/ListaIntegrantes";
 import { CarrinhoProvider } from "./contexts/CarrinhoContext";
+import Checkout from "./pages/checkout/checkout";
+import CompraFinalizada from "./pages/compra/CompraFinalizada";
 
 function App() {
 
@@ -63,6 +65,9 @@ function App() {
               <Route path="/carrinho" element={<Carrinho />} />
               <Route path="/produtos" element={<ListaProdutos />} />
               <Route path="/integrantes" element={<ListaIntegrantes />} />
+
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/compraFinalizada" element={<CompraFinalizada />} />
             </Routes>
           </div>
           <Footer />

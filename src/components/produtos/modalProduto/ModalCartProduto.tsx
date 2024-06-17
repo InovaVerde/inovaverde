@@ -21,31 +21,15 @@ function ModalCartProduto() {
   const { usuario, setUsuario } = useContext(AuthContext);
   const token = usuario.token;
 
-  async function comprar() {
-    const compraData = {
-      userId: usuario.id,
-      itensCompra: carrinho.map(item => ({
-        produtoId: item.id,
-        quantidade: item.quantidadeCarrinho
-      }))
-    };
-  
-    try {
-      const response = await axios.post('http://localhost:8080/compras', compraData, {
-        headers: {
-          'Authorization': token
-        }
-      });
-  
-      // Atualizar o crédito de carbono do usuário
-      const novoUsuario = {...usuario, creditoCarbono: usuario.creditoCarbono + total}; // atualiza o crédito de carbono
-  
-      setUsuario(novoUsuario); // Atualiza o estado do usuário
-  
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
+  const checkoutPage = () => {
+    // Verifica se o carrinho está vazio
+    if (carrinho.length === 0) {
+      alert('Não há produtos no carrinho.');
+      return;
     }
+    // Fecha o modal
+    setShow(false);
+    navigate('/checkout');
   }
 
   useEffect(() => {
@@ -78,14 +62,14 @@ function ModalCartProduto() {
               color="white"
               xmlns="https://www.w3.org/2000/svg"
               fill="none"
-              viewBox="0 0 24 "
-              stroke-width="2"
+              viewBox="0 0 24"
+              strokeWidth="2"
               stroke="currentColor"
               className="file:  h-6 w-6"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
               />
             </svg>
@@ -118,7 +102,7 @@ function ModalCartProduto() {
                         className="icon icon-tabler icon-tabler-chevron-left"
                         width={16}
                         height={16}
-                        viewBox="0 0 24 24"
+                        viewBox="0 0 24"
                         strokeWidth="1.5"
                         stroke="currentColor"
                         fill="none"
@@ -128,7 +112,7 @@ function ModalCartProduto() {
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <polyline points="15 6 9 12 15 18" />
                       </svg>
-                      <p className="text-sm pl-2 leading-none">Voltar</p>
+                      <p className="text-sm pl-2">Voltar</p>
                     </div>
                     <p className="text-5xl font-black leading-10 text-green-800 pt-3">
                       Carrinho
@@ -183,7 +167,7 @@ function ModalCartProduto() {
                           </p>
                         </div>
                         <button
-                          onClick={comprar}
+                          onClick={checkoutPage}
                           className="text-base leading-none w-full py-5 bg-green-800 border-green-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-800 text-white rounded-lg hover:bg-green-600"
                         >
                           Comprar

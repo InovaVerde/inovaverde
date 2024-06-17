@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { CarrinhoContext } from "../../../contexts/CarrinhoContext"; // Importe o contexto do carrinho
 import Produto from "../../../models/Produto";
@@ -30,21 +30,38 @@ function CardProduto({ post }: CardProdutoProps): JSX.Element {
     }
   };
 
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
-    <div className="card card-compact w-80 bg-green-800 shadow-xl rounded-lg">
-      <figure>
-      <ProdutosAvatar foto={post.foto}/>
+    <div className="card card-compact w-80 bg-green-800 shadow-xl rounded-lg" style={{ position: 'relative', minHeight: '472px'}}>
+      <figure style={{ maxWidth: '457.33px', maxHeight: '320px' }}>
+        <ProdutosAvatar foto={post.foto}/>
       </figure>
       <div className="card-body ml-3">
+      <div style={{ height: '70px', overflow: 'hidden'}}>
         <p className="card-title text-2xl font-semibold text-white">
           {post.nome}
         </p>
+      </div>
+      <div style={{ height: '100px',}}>
         <p className="font-bold text-green-100">R$ {post.preco}</p>
         <p className="text-green-50 text-sm">
           Estoque disponível: {estoqueProduto}
         </p>
-        <p className="text-green-50 text-sm">{post.descricao}</p>
-        <div className="card-actions">
+        <p className="text-green-50 text-sm">
+  <div style={{ display: 'inline-block' }}>
+    {isExpanded || post.descricao.length <= 45 ? post.descricao : `${post.descricao.substring(0, 45)}... `}
+  </div>
+  {post.descricao.length > 45 && (
+    <div style={{ display: 'inline-block' }}>
+      <button onClick={() => setIsExpanded(!isExpanded)}>
+        {isExpanded ? 'Ver menos' : 'Ver mais'}
+      </button>
+    </div>
+  )}
+</p>
+      </div>
+        <div className="card-actions" style={{ width: '100%' }}>
           <div
             style={{
               display: "grid",
@@ -63,7 +80,7 @@ function CardProduto({ post }: CardProdutoProps): JSX.Element {
               Adicionar ao carrinho
             </button>
           </div>
-          <div className="flex -ml-3">
+          <div className="flex -ml-3 gap-16">
             {usuario.id === 1 && (
               <Link
                 to={`/editarProduto/${post.id}`}
@@ -85,6 +102,7 @@ function CardProduto({ post }: CardProdutoProps): JSX.Element {
       </div>
     </div>
   );
+  
 }
 
 export default CardProduto;
