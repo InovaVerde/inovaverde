@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import Categoria from "../../../models/Categoria";
+import { toastAlerta } from '../../../utils/toastAlerta'
    
   export function CardDefault() {
 
@@ -25,7 +26,7 @@ import Categoria from "../../../models/Categoria";
             })
         } catch (error: any) {
             if (error.toString().includes('403')) {
-                alert('O token expirou, favor logar novamente.')
+                toastAlerta('O token expirou, favor logar novamente', 'info');
                 handleLogout()
             }
         }
@@ -33,7 +34,7 @@ import Categoria from "../../../models/Categoria";
 
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado.')
+            toastAlerta('Você precisa estar logado', 'info');
             navigate('/login')
         }
     }, [token])
@@ -56,10 +57,10 @@ import Categoria from "../../../models/Categoria";
                 }
             })
 
-            alert('Categoria apagada com sucesso.')
+            toastAlerta('Categoria apagada com sucesso.', 'sucesso');
 
         } catch (error) {
-            alert('Erro ao apagar o Categoria')
+          toastAlerta('Erro ao apagar o Categoria', 'erro');
         }
 
         retornar()
