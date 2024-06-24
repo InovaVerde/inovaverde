@@ -6,6 +6,7 @@ import { buscar } from "../../../services/Service";
 import CardProduto from "../cardProduto/CardProduto";
 import Categoria from "../../../models/Categoria";
 import { Pagination } from "@mui/material";
+import { toastAlerta } from "../../../utils/toastAlerta";
 
 function ListaProdutos() {
   const [produtos, setProdutos] = useState<Produto[]>([]);
@@ -26,7 +27,7 @@ function ListaProdutos() {
 
   useEffect(() => {
     if (token === "") {
-      alert("Você precisa estar logado.");
+      toastAlerta('Você precisa estar logado', 'info');
       navigate("/");
     }
   }, [token]);
@@ -65,7 +66,7 @@ function ListaProdutos() {
     } catch (error) {
         console.error("Erro ao buscar produtos:", error);
         if (error.toString().includes("403")) {
-            alert("O token expirou, favor logar novamente.");
+            toastAlerta('O token expirou, favor logar novamente', 'info');
             handleLogout();
         }
     }
@@ -85,7 +86,7 @@ function ListaProdutos() {
 
   useEffect(() => {
     if (token === "") {
-      alert("Você precisa estar logado.");
+      toastAlerta('Você precisa estar logado', 'info');
       navigate("/");
     }
     buscarCategorias();

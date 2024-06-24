@@ -5,6 +5,7 @@ import Categoria from '../../../models/Categoria';
 import { buscar } from '../../../services/Service';
 import { CardDefault } from './CardDefault';
 import '../formularioCategoria/FormularioCategoria.css';
+import { toastAlerta } from '../../../utils/toastAlerta';
 
 function DeletarCategoria() {
     const [, setCategoria] = useState<Categoria>({} as Categoria);
@@ -22,7 +23,7 @@ function DeletarCategoria() {
             });
         } catch (error: any) {
             if (error.toString().includes('403')) {
-                alert('O token expirou, favor logar novamente.');
+                toastAlerta('O token expirou, favor logar novamente', 'info');
                 handleLogout();
             }
         }
@@ -30,7 +31,7 @@ function DeletarCategoria() {
 
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado.');
+            toastAlerta('Você precisa estar logado', 'info');
             navigate('/login');
         }
     }, [token, navigate]);

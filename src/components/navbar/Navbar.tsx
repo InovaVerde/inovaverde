@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Avatar from "../avatar/Avatar.tsx";
 import ModalCartProduto from "../produtos/modalProduto/ModalCartProduto.tsx";
+import { toastAlerta } from "../../utils/toastAlerta.ts";
 
 const navigation = [
   { name: "Criar Conta", to: "/cadastro", current: false },
@@ -23,7 +24,7 @@ export default function Example() {
 
   function logout() {
     handleLogout();
-    alert("Usuário deslogado com sucesso");
+    toastAlerta('Usuário deslogado com sucesso', 'sucesso');
     navigate("/login");
   }
 

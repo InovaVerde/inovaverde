@@ -4,6 +4,7 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import { CarrinhoContext } from "../../../contexts/CarrinhoContext"; // Importe o contexto do carrinho
 import Produto from "../../../models/Produto";
 import ProdutosAvatar from "../../avatar/ProdutosAvatar";
+import { toastAlerta } from "../../../utils/toastAlerta";
 
 interface CardProdutoProps {
   post: Produto;
@@ -21,7 +22,7 @@ function CardProduto({ post }: CardProdutoProps): JSX.Element {
 
     if (isInCarrinho) {
       // Se o produto já está no carrinho, exibe um alerta
-      alert("Este item já está no carrinho!");
+      toastAlerta('Este item já está no carrinho!', 'info');
     } else {
       // Define a quantidade do produto no carrinho
       post.quantidadeCarrinho = 1;

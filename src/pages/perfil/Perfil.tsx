@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import Avatar from "../../components/avatar/Avatar.tsx";
 import "./Perfil.css";
+import { toastAlerta } from "../../utils/toastAlerta.ts";
 
 function Perfil() {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ function Perfil() {
 
   useEffect(() => {
     if (usuario.token === "") {
-      alert("Você precisa estar logado");
+      toastAlerta('Você precisa estar logado', 'info');
       navigate("/login");
     }
   }, [usuario.token]);

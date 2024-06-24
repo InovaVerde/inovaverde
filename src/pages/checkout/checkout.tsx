@@ -3,6 +3,7 @@ import { CarrinhoContext } from "../../contexts/CarrinhoContext";
 import { AuthContext } from "../../contexts/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toastAlerta } from "../../utils/toastAlerta";
 
 function Checkout() {
   const { carrinho } = useContext(CarrinhoContext); // Use o hook useContext para acessar o carrinho
@@ -71,10 +72,10 @@ function Checkout() {
 
       setUsuario(novoUsuario); // Atualiza o estado do usuário
 
-      alert(
+      toastAlerta(
         `Compra realizada com sucesso! Você ganhou: ${somaCreditos.toFixed(
           2
-        )} créditos`
+        )} créditos`, 'sucesso'
       );
 
       limparCarrinho();
