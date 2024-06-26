@@ -7,7 +7,6 @@ import CardCategorias from '../cardCategorias/CardCategorias';
 import { useContext, useEffect, useState } from 'react';
 import '../formularioCategoria/FormularioCategoria.css';
 import './ListaCategoria.css';
-import { toastAlerta } from '../../../utils/toastAlerta';
 
 function ListaCategorias() {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
@@ -27,7 +26,7 @@ function ListaCategorias() {
       });
     } catch (error: any) {
       if (error.toString().includes('403')) {
-        toastAlerta('O token expirou, favor logar novamente', 'info');
+        alert('O token expirou, favor logar novamente.')
         handleLogout()
       }
     }
@@ -46,7 +45,7 @@ function ListaCategorias() {
       );
     } catch (error: any) {
       if (error.toString().includes("403")) {
-        toastAlerta('O token expirou, favor logar novamente', 'info');
+        alert("O token expirou, favor logar novamente.");
         handleLogout();
       }
     }
@@ -54,7 +53,7 @@ function ListaCategorias() {
 
   useEffect(() => {
     if (token === '') {
-      toastAlerta('Você precisa estar logado', 'info');
+      alert('Você precisa estar logado.');
       navigate('/login');
     }
   }, [token]);

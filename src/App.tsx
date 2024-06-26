@@ -21,8 +21,6 @@ import ListaIntegrantes from "./pages/listaIntegrantes/ListaIntegrantes";
 import { CarrinhoProvider } from "./contexts/CarrinhoContext";
 import Checkout from "./pages/checkout/checkout";
 import CompraFinalizada from "./pages/compra/CompraFinalizada";
-import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -30,11 +28,9 @@ function App() {
     <>
       <AuthProvider>
       <CarrinhoProvider>
-      <ToastContainer />
         <BrowserRouter>
           <Navbar />
           <div className="min-h-[80vh]">
-            
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/login" element={<Login />} />
