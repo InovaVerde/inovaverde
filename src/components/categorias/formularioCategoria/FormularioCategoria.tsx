@@ -4,7 +4,6 @@ import Categoria from '../../../models/Categoria';
 import { atualizar, buscar, cadastrar } from '../../../services/Service';
 import { useState, useContext, useEffect, ChangeEvent } from 'react';
 import './FormularioCategoria.css';
-import { toastAlerta } from '../../../utils/toastAlerta';
 
 function FormularioCategoria() {
   const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
@@ -50,15 +49,15 @@ function FormularioCategoria() {
           }
         })
 
-        toastAlerta('Categoria atualizada com sucesso!', 'sucesso');
+        alert('Categoria atualizada com sucesso!')
         retornar()
 
       } catch (error: any) {
         if (error.toString().includes('403')) {
-          toastAlerta('O token expirou, favor logar novamente', 'info');
+          alert('O token expirou, favor logar novamente.')
           handleLogout()
         } else {
-          toastAlerta('Erro ao atualizar a categoria.', 'erro');
+          alert('Erro ao atualizar a categoria.')
           console.log(error)
         }
 
@@ -72,14 +71,14 @@ function FormularioCategoria() {
           }
         })
 
-        toastAlerta('Categoria cadastrada com sucesso!', 'sucesso');
+        alert('Categoria cadastrada com sucesso!')
 
       } catch (error: any) {
         if (error.toString().includes('403')) {
-          toastAlerta('O token expirou, favor logar novamente', 'info');
+          alert('O token expirou, favor logar novamente.')
           handleLogout()
         } else {
-          toastAlerta('Erro ao cadastrar a categoria.', 'erro');
+          alert('Erro ao cadastrar a categoria.')
         }
       }
     }
@@ -93,7 +92,7 @@ function FormularioCategoria() {
 
   useEffect(() => {
     if (token === '') {
-      toastAlerta('Você precisa estar logado', 'info');
+      alert('Você precisa estar logado.');
       navigate('/login');
     }
   }, [token]);

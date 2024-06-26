@@ -5,7 +5,6 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { CarrinhoContext } from '../../../contexts/CarrinhoContext';
 import axios from "axios";
-import { toastAlerta } from "../../../utils/toastAlerta";
 
 
 function ModalCartProduto() {
@@ -25,7 +24,7 @@ function ModalCartProduto() {
   const checkoutPage = () => {
     // Verifica se o carrinho está vazio
     if (carrinho.length === 0) {
-      toastAlerta('Não há produtos no carrinho.', 'info');
+      alert('Não há produtos no carrinho.');
       return;
     }
     // Fecha o modal
@@ -35,7 +34,7 @@ function ModalCartProduto() {
 
   useEffect(() => {
     if (token === '') {
-      toastAlerta('Você precisa estar logado', 'info');
+      alert('Você precisa estar logado.');
       navigate('/');
     }
   }, [token]);
