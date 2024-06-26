@@ -1,6 +1,5 @@
 import { createContext, ReactNode, useState } from "react";
 import Produto from "../models/Produto";
-import { toastAlerta } from "../utils/toastAlerta";
 
 
 interface ContextProps {
@@ -40,7 +39,7 @@ export function Provider({ children }: ContextProviderProps) {
     }
 
     function limparCart() {
-        toastAlerta('Compra Efetuada com Sucesso', 'sucesso');
+        alert("Compra Efetuada com Sucesso")
         setItems([])
     }
 
