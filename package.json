@@ -47,5 +47,17 @@
     "tailwindcss": "^3.4.3",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
-  }
+  },
+  "description": "<div style=\"text-align: justify;\">\r   <p style=\"text-align: justify;\">\r   O  projeto  InovaVerde  é  um  e-commerce baseado  na  ODS  9  da  ONU  (Indústria,  inovação  e  infraestrutura).\r   </p>\r </div>",
+  "main": "postcss.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Inova-Verde/inovaverde.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Inova-Verde/inovaverde/issues"
+  },
+  "homepage": "https://github.com/Inova-Verde/inovaverde#readme"
 }
